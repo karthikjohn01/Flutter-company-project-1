@@ -1,152 +1,126 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MainApp());
 }
 
-class MainApp extends StatelessWidget{
+class MainApp extends StatefulWidget {
+  @override
+  _MainAppState createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  List<int> age= [
+    33,34,35,36,37,38,39,40
+
+  ];
+
+  int selectedIndex = 1;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.white,
-          body: Stack(
-        children: [
-          Container(
-            color: Colors.black, // Dark overlay
-          ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 60),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Login",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text("Sign up",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                       
-                      ],
-                    ),
-                  ],
-                ),
-
-                 
-                Text(
-                  "HELLO ROOKIES,",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-               
-                Text(
-                  "ENTER YOUR INFORMATIONS BELOW OR \n LOGIN WITH ANOTHER ACCOUNT",
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-
-                 TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    label:Text("Email"),labelStyle: TextStyle(fontWeight:FontWeight.bold,color: Colors.white),
-                    border: UnderlineInputBorder()
-                    ),
-                 
-                    ),
-
-                     TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    label:Text("Password"),labelStyle: TextStyle(fontWeight:FontWeight.bold,color: Colors.white),
-                    border: UnderlineInputBorder()
-                    ),
-                 
-                    ),
-
-                    TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    label:Text("Password Again"),labelStyle: TextStyle(fontWeight:FontWeight.bold,color: Colors.white),
-                    border: UnderlineInputBorder()
-                    ),
-                 
-                    ),
-
-                    SizedBox(height: 40,),
-                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      
-                  
-                  children: [
-                    
-                      
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Icon(Icons.apple, color: Colors.black),
-                          ),
-                        ]),
-
-
-                        SizedBox(height: 40,),
-                         CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.g_mobiledata, color: Colors.black),
-                        ),
-
-
-
-                         MaterialButton(
+        backgroundColor: Colors.black,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          
+          children: [
+            Text(
+              "HOW OLD ARE YOU?",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+          
+            Text(
+              "THIS HELPS US CREATE YOUR PERSONALIZED PLAN",
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            
+            Container(
+              
+              
+              child: Expanded(
+                
+                
+                child: ListView.builder(
+                
+                  itemCount: age.length,
+                  itemBuilder: (context, index) {
+                    bool isSelected = index == selectedIndex;
+                    return TextButton(
                       onPressed: () {
+                        setState(() {
+                          selectedIndex = index;
+                        }
+                        );
+                      
                         
+              
                       },
-                      color: Colors.lightGreenAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Sign up",
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Text(
+                              age[index].toString(),
                               style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
+                                color: isSelected ? Colors.white : Colors.grey,
+                                fontSize: 20,
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                    
                               ),
+                            
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: Colors.black,
+                          ),
+                          if (isSelected)
+                            Container(
+                              height: 3,
+                              width: 100,
+                              
+                              
+                              color: Colors.lime,
                             ),
-])))
-
-
-                    
-                  
-         ] ),
-
-
-              ]))])));
-        
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                  ),
+                  MaterialButton(
+                    color: Colors.lime,
+                    onPressed: () {},
+                    child: Text(
+                      "Next",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
